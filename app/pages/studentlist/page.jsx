@@ -1,11 +1,39 @@
-import React from "react";
+"use client";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
-function StudentList({ students, onEdit, onDelete }) {
-  const handleDelete = (id) => {
-    onDelete(id);
+function StudentList() {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const fetchStudents = async () => {
+    try {
+      const response = await axios.get("/api");
+      setStudents(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    }
   };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete("/api", { data: { id } });
+      if (response.status === 200) {
+        fetchStudents();
+      }
+    } catch (error) {
+      console.error("Error deleting student:", error);
+    }
+  };
+
   return (
     <div className="overflow-x-auto">
+      <h1 className="text-3xl text-center my-5 font-bold">Student List</h1>
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
@@ -46,12 +74,11 @@ function StudentList({ students, onEdit, onDelete }) {
               </td>
 
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button
-                  onClick={() => onEdit(student)}
-                  className="text-indigo-600 hover:text-indigo-900"
-                >
-                  Edit
-                </button>
+                <Link href={`/pages/editform/${student.id}`}>
+                  <button className="text-indigo-600 hover:text-indigo-900">
+                    Edit
+                  </button>
+                </Link>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <button
