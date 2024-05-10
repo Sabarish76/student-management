@@ -5,7 +5,7 @@ import StudentForm from "./StudentForm/page";
 import StudentList from "./StudentList/page";
 import EditStudentForm from "./EditStudentForm/page";
 
-export default function Home() {
+function Home() {
   const [students, setStudents] = useState([]);
   const [editingStudent, setEditingStudent] = useState(null);
 
@@ -81,3 +81,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home;
