@@ -7,24 +7,24 @@ import StudentForm from "./pages/studentform/page";
 import { useRouter } from "next/navigation";
 
 function Home() {
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    const handleRouteChange = (url) => {
-      Mixpanel?.track("Page View", { path: url });
-    };
+  // useEffect(() => {
+  //   const handleRouteChange = (url) => {
+  //     Mixpanel?.track("Page View", { path: url });
+  //   };
 
-    // Track initial page load
-    Mixpanel?.track("Page View", { path: router.asPath });
+  //   // Track initial page load
+  //   Mixpanel?.track("Page View", { path: router.asPath });
 
-    // Add router event listener for route changes
-    router?.events?.on("routeChangeComplete", handleRouteChange);
+  //   // Add router event listener for route changes
+  //   router?.events?.on("routeChangeComplete", handleRouteChange);
 
-    // Clean up event listener
-    return () => {
-      router?.events?.off("routeChangeComplete", handleRouteChange);
-    };
-  }, []);
+  //   // Clean up event listener
+  //   return () => {
+  //     router?.events?.off("routeChangeComplete", handleRouteChange);
+  //   };
+  // }, []);
   return (
     <main>
       <StudentForm />
