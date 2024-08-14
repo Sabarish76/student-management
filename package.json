@@ -14,6 +14,7 @@
     "body-parser": "^1.20.2",
     "mixpanel-browser": "^2.52.0",
     "next": "^14.2.4",
+    "posthog-js": "^1.139.2",
     "react": "^18",
     "react-dom": "^18"
   },
